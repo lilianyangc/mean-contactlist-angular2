@@ -28,34 +28,32 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:2701
     console.log("App now running on port", port);
   });
 });
+
 // CONTACTS API ROUTES BELOW
 
 // Generic error handler used by all endpoints.
 function handleError(res, reason, message, code) {
-    console.log("ERROR: " + reason);
-    res.status(code || 500).json({"error": message});
-  }
-  
-  /*  "/api/contacts"
-   *    GET: finds all contacts
-   *    POST: creates a new contact
-   */
-  
-  app.get("/api/contacts", function(req, res) {
+  console.log("ERROR: " + reason);
+  res.status(code || 500).json({"error": message});
+}
 
-    db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
-        if (err) {
-          handleError(res, err.message, "Failed to get contacts.");
-        } else {
-          res.status(200).json(docs);
-        }
-      });
+/*  "/api/contacts"
+ *    GET: finds all contacts
+ *    POST: creates a new contact
+ */
 
+app.get("/api/contacts", function(req, res) {
+  db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get contacts.");
+    } else {
+      res.status(200).json(docs);
+    }
   });
-  
-  app.post("/api/contacts", function(req, res) {
+});
 
-    var newContact = req.body;
+app.post("/api/contacts", function(req, res) {
+  var newContact = req.body;
   newContact.createDate = new Date();
 
   if (!req.body.name) {
@@ -69,20 +67,19 @@ function handleError(res, reason, message, code) {
       }
     });
   }
-  
-  });
-  
-  /*  "/api/contacts/:id"
-   *    GET: find contact by id
-   *    PUT: update contact by id
-   *    DELETE: deletes contact by id
-   */
-  
-  app.get("/api/contacts/:id", function(req, res) {
-  });
-  
-  app.put("/api/contacts/:id", function(req, res) {
-  });
-  
-  app.delete("/api/contacts/:id", function(req, res) {
-  });
+});
+
+/*  "/api/contacts/:id"
+ *    GET: find contact by id
+ *    PUT: update contact by id
+ *    DELETE: deletes contact by id
+ */
+
+app.get("/api/contacts/:id", function(req, res) {
+});
+
+app.put("/api/contacts/:id", function(req, res) {
+});
+
+app.delete("/api/contacts/:id", function(req, res) {
+});
