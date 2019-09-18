@@ -31,7 +31,6 @@ mongodb.MongoClient.connect(process.env.MONGOLAB_URI || "mongodb://localhost:270
   });
 });
 
-// ///////////////////////////////////////////////////////////////
 // CONTACTS API ROUTES BELOW
 
 // Generic error handler used by all endpoints.
