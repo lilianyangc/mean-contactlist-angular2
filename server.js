@@ -11,10 +11,8 @@ app.use(bodyParser.json());
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
 var db;
 
-//heroku config:set MONGOLAB_URI = "mongodb+srv://test-user:test-password@cluster0-eh8pq.mongodb.net/test"
-
 // Connect to the database before starting the application server.
-mongodb.MongoClient.connect(process.env.MONGOLAB_URI || "mongodb://localhost:27017/test", function (err, client) {
+mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/test", function (err, client) {
   if (err) {
     console.log(err);
     process.exit(1);
@@ -30,7 +28,6 @@ mongodb.MongoClient.connect(process.env.MONGOLAB_URI || "mongodb://localhost:270
     console.log("App now running on port", port);
   });
 });
-
 // CONTACTS API ROUTES BELOW
 
 // Generic error handler used by all endpoints.
